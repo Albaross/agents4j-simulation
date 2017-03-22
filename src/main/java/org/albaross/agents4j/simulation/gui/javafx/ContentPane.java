@@ -3,31 +3,34 @@ package org.albaross.agents4j.simulation.gui.javafx;
 import java.util.List;
 
 import javafx.scene.Node;
+import javafx.scene.control.Accordion;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TabPane.TabClosingPolicy;
+import javafx.scene.control.TitledPane;
 
 public class ContentPane extends SplitPane {
 
-	protected TabPane left;
+	protected Accordion left;
 	protected TabPane right;
 
-	public ContentPane(List<ItemView<Node>> items, List<OutputView<Node>> outputs) {
+	public ContentPane(List<ViewItem<Node>> elements, List<ViewItem<Node>> outputs) {
 		this.setDividerPositions(0.25);
 
-		left = new TabPane();
-		left.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
+		left = new Accordion();
 
-		for (ItemView<Node> i : items) {
-			left.getTabs().add(new Tab(i.getCaption(), i.getView()));
+		TitledPane tp;
+		for (ViewItem<Node> e : elements) {
+			left.getPanes().add(tp = new TitledPane(e.getTitle(), e.getDisplay()));
+			left.setExpandedPane(tp);
 		}
 
 		right = new TabPane();
 		right.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 
-		for (OutputView<Node> o : outputs) {
-			right.getTabs().add(new Tab(o.getCaption(), o.getView()));
+		for (ViewItem<Node> o : outputs) {
+			right.getTabs().add(new Tab(o.getTitle(), o.getDisplay()));
 		}
 
 		this.getItems().addAll(left, right);

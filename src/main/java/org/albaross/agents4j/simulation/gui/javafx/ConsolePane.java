@@ -7,7 +7,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 
-public class ConsolePane extends HBox implements OutputView<Node> {
+public class ConsolePane extends HBox implements ViewItem<Node> {
 
 	protected TextArea console;
 
@@ -37,12 +37,12 @@ public class ConsolePane extends HBox implements OutputView<Node> {
 	}
 
 	@Override
-	public String getCaption() {
+	public String getTitle() {
 		return "Console";
 	}
 
 	@Override
-	public Node getView() {
+	public Node getDisplay() {
 		return this;
 	}
 

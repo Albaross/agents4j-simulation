@@ -7,7 +7,7 @@ import javafx.scene.control.TreeView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 
-public class AgentTreePane extends HBox implements ItemView<Node> {
+public class AgentTreePane extends HBox implements ViewItem<Node> {
 
 	public AgentTreePane() {
 		TreeItem<String> root = new TreeItem<String>("Agents");
@@ -22,12 +22,12 @@ public class AgentTreePane extends HBox implements ItemView<Node> {
 	}
 
 	@Override
-	public String getCaption() {
+	public String getTitle() {
 		return "Agents";
 	}
 
 	@Override
-	public Node getView() {
+	public Node getDisplay() {
 		return this;
 	}
 
