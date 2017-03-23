@@ -6,15 +6,14 @@ import java.util.Map;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 
-public class MenuPane extends MenuBar {
+public class MenuPanel extends MenuBar {
 
 	protected Map<String, Menu> menus = new LinkedHashMap<>();
 
-	public MenuPane(String... keys) {
+	public MenuPanel(String... keys) {
 		Menu mn;
 		for (String key : keys) {
-			mn = new Menu(key);
-			menus.put(key, mn);
+			menus.put(key, mn = new Menu(key));
 			this.getMenus().add(mn);
 		}
 	}

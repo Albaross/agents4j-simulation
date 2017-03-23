@@ -1,9 +1,11 @@
 package org.albaross.agents4j.simulation.gui.javafx;
 
-public interface ViewItem<N> {
+import javafx.scene.Node;
+
+public interface ViewItem {
 
 	String getTitle();
 
-	N getDisplay();
+	Node getDisplay();
 
 }

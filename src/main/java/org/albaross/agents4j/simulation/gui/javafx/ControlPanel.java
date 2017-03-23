@@ -8,11 +8,11 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 
-public class ControlPane extends HBox {
+public class ControlPanel extends HBox {
 
 	protected Map<String, Button> buttons = new LinkedHashMap<>();
 
-	public ControlPane(String... keys) {
+	public ControlPanel(String... keys) {
 		this.setAlignment(Pos.CENTER_RIGHT);
 		this.setSpacing(8);
 		this.setPadding(new Insets(8));

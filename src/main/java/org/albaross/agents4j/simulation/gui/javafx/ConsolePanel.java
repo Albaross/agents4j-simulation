@@ -7,11 +7,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 
-public class ConsolePane extends HBox implements ViewItem<Node> {
+public class ConsolePanel extends HBox implements ViewItem {
 
 	protected TextArea console;
 
-	public ConsolePane() {
+	public ConsolePanel() {
 		console = new TextArea();
 		console.setEditable(false);
 

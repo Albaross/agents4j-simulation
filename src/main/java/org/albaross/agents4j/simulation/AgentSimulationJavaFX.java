@@ -1,6 +1,6 @@
 package org.albaross.agents4j.simulation;
 
-import org.albaross.agents4j.simulation.gui.javafx.SimulationPane;
+import org.albaross.agents4j.simulation.gui.javafx.SimulationPanel;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 public class AgentSimulationJavaFX extends Application {
 
 	private ConfigurableApplicationContext springContext;
-	private SimulationPane sim;
+	private SimulationPanel sim;
 
 	public static void main(String[] args) {
 		Application.launch(args);
@@ -22,7 +22,7 @@ public class AgentSimulationJavaFX extends Application {
 	@Override
 	public void init() throws Exception {
 		this.springContext = SpringApplication.run(AgentSimulationJavaFX.class);
-		this.sim = new SimulationPane();
+		this.sim = new SimulationPanel();
 	}
 
 	@Override

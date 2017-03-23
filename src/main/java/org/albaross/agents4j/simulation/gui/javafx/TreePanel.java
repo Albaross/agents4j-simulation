@@ -6,41 +6,45 @@ import java.util.Objects;
 
 import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.control.MultipleSelectionModel;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 
-public class TreePane<T> extends HBox implements ViewItem<Node> {
+public class TreePanel<T> extends HBox implements ViewItem {
 
 	protected String title;
+	protected TreeView<T> tree;
 	protected List<ItemDoubleClickListener<T>> listeners;
 
-	public TreePane(String title, TreeNode<T> tree) {
+	@SuppressWarnings("unchecked")
+	public TreePanel(String title) {
 		this.title = Objects.requireNonNull(title, "title must not´be null");
 		this.listeners = new ArrayList<>();
-
-		TreeItem<T> root = new TreeItem<>(tree.getValue());
-		root.setExpanded(true);
-		root.getChildren().addAll(new TreeItem<String>("Item 1"), new TreeItem<String>("Item 2"),
-				new TreeItem<String>("Item 3"));
-		TreeView<String> treeView = new TreeView<String>(root);
-
-		this.setPadding(new Insets(8));
-		HBox.setHgrow(treeView, Priority.ALWAYS);
-		this.getChildren().add(treeView);
-		treeView.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
+		this.tree = new TreeView<>();
+		this.tree.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
 			if (event.getClickCount() < 2)
 				return;
 
-			System.out.println("doubleclicked");
-			TreeView source = (TreeView) event.getSource();
-			MultipleSelectionModel<TreeItem<String>> tree = source.getSelectionModel();
-			TreeItem<String> selected = tree.getSelectedItem();
-			System.out.println(selected.getValue());
+			T value = ((TreeItem<T>) ((TreeView<T>) event.getSource()).getSelectionModel().getSelectedItem())
+					.getValue();
+
+			for (ItemDoubleClickListener<T> l : this.listeners) {
+				l.handleDoubleClick(value);
+			}
 		});
+
+		this.setPadding(new Insets(8));
+		HBox.setHgrow(tree, Priority.ALWAYS);
+		this.getChildren().add(tree);
+	}
+
+	@SuppressWarnings("unchecked")
+	public static <T> TreeItem<T> node(T value, TreeItem<T>... children) {
+		TreeItem<T> item = new TreeItem<T>(value);
+		item.getChildren().addAll(children);
+		return item;
 	}
 
 	public void addListener(ItemDoubleClickListener<T> listener) {
@@ -55,9 +59,13 @@ public class TreePane<T> extends HBox implements ViewItem<Node> {
 		this.listeners.remove(index);
 	}
 
+	public TreeView<T> getTree() {
+		return tree;
+	}
+
 	@Override
 	public String getTitle() {
-		return "Agents";
+		return title;
 	}
 
 	@Override
