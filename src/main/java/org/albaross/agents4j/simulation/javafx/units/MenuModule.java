@@ -1,4 +1,4 @@
-package org.albaross.agents4j.simulation.gui.javafx;
+package org.albaross.agents4j.simulation.javafx.units;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -6,11 +6,11 @@ import java.util.Map;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 
-public class MenuPanel extends MenuBar {
+public class MenuModule extends MenuBar {
 
 	protected Map<String, Menu> menus = new LinkedHashMap<>();
 
-	public MenuPanel(String... keys) {
+	public MenuModule(String... keys) {
 		Menu mn;
 		for (String key : keys) {
 			menus.put(key, mn = new Menu(key));

@@ -1,4 +1,4 @@
-package org.albaross.agents4j.simulation.gui.javafx;
+package org.albaross.agents4j.simulation.javafx.units;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -8,11 +8,11 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 
-public class ControlPanel extends HBox {
+public class ControlModule extends HBox {
 
 	protected Map<String, Button> buttons = new LinkedHashMap<>();
 
-	public ControlPanel(String... keys) {
+	public ControlModule(String... keys) {
 		this.setAlignment(Pos.CENTER_RIGHT);
 		this.setSpacing(8);
 		this.setPadding(new Insets(8));

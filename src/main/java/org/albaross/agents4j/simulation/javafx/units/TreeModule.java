@@ -1,8 +1,11 @@
-package org.albaross.agents4j.simulation.gui.javafx;
+package org.albaross.agents4j.simulation.javafx.units;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import org.albaross.agents4j.simulation.javafx.ViewModule;
+import org.albaross.agents4j.simulation.javafx.handler.ItemDoubleClickHandler;
 
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -12,14 +15,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 
-public class TreePanel<T> extends HBox implements ViewItem {
+public class TreeModule<T> extends HBox implements ViewModule {
 
 	protected String title;
 	protected TreeView<T> tree;
-	protected List<ItemDoubleClickListener<T>> listeners;
+	protected List<ItemDoubleClickHandler<T>> listeners;
 
 	@SuppressWarnings("unchecked")
-	public TreePanel(String title) {
+	public TreeModule(String title) {
 		this.title = Objects.requireNonNull(title, "title must not´be null");
 		this.listeners = new ArrayList<>();
 		this.tree = new TreeView<>();
@@ -30,7 +33,7 @@ public class TreePanel<T> extends HBox implements ViewItem {
 			T value = ((TreeItem<T>) ((TreeView<T>) event.getSource()).getSelectionModel().getSelectedItem())
 					.getValue();
 
-			for (ItemDoubleClickListener<T> l : this.listeners) {
+			for (ItemDoubleClickHandler<T> l : this.listeners) {
 				l.handleDoubleClick(value);
 			}
 		});
@@ -47,11 +50,11 @@ public class TreePanel<T> extends HBox implements ViewItem {
 		return item;
 	}
 
-	public void addListener(ItemDoubleClickListener<T> listener) {
+	public void addListener(ItemDoubleClickHandler<T> listener) {
 		this.listeners.add(listener);
 	}
 
-	public void removeListener(ItemDoubleClickListener<T> listener) {
+	public void removeListener(ItemDoubleClickHandler<T> listener) {
 		this.listeners.remove(listener);
 	}
 

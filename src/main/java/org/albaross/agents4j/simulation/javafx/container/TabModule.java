@@ -1,22 +1,24 @@
-package org.albaross.agents4j.simulation.gui.javafx;
+package org.albaross.agents4j.simulation.javafx.container;
 
 import java.util.Arrays;
 import java.util.List;
+
+import org.albaross.agents4j.simulation.javafx.ViewModule;
 
 import javafx.scene.Node;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 
-public class TabPanel extends TabPane implements ViewItem {
+public class TabModule extends TabPane implements ViewModule {
 
-	public TabPanel(ViewItem... items) {
+	public TabModule(ViewModule... items) {
 		this(Arrays.asList(items));
 	}
 
-	public TabPanel(List<ViewItem> items) {
+	public TabModule(List<ViewModule> items) {
 		this.setTabClosingPolicy(TabClosingPolicy.UNAVAILABLE);
 
-		for (ViewItem it : items) {
+		for (ViewModule it : items) {
 			this.getTabs().add(new Tab(it.getTitle(), it.getDisplay()));
 		}
 	}

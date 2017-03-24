@@ -1,4 +1,6 @@
-package org.albaross.agents4j.simulation.gui.javafx;
+package org.albaross.agents4j.simulation.javafx.units;
+
+import org.albaross.agents4j.simulation.javafx.ViewModule;
 
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -7,11 +9,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 
-public class ConsolePanel extends HBox implements ViewItem {
+public class ConsoleModule extends HBox implements ViewModule {
 
 	protected TextArea console;
 
-	public ConsolePanel() {
+	public ConsoleModule() {
 		console = new TextArea();
 		console.setEditable(false);
 

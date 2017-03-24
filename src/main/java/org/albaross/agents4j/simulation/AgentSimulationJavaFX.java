@@ -1,6 +1,9 @@
 package org.albaross.agents4j.simulation;
 
-import org.albaross.agents4j.simulation.gui.javafx.SimulationPanel;
+import org.albaross.agents4j.simulation.javafx.SimulationPane;
+import org.albaross.agents4j.simulation.javafx.container.TabModule;
+import org.albaross.agents4j.simulation.javafx.units.ConsoleModule;
+import org.albaross.agents4j.simulation.javafx.units.TreeModule;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -13,7 +16,7 @@ import javafx.stage.Stage;
 public class AgentSimulationJavaFX extends Application {
 
 	private ConfigurableApplicationContext springContext;
-	private SimulationPanel sim;
+	private SimulationPane sim;
 
 	public static void main(String[] args) {
 		Application.launch(args);
@@ -22,14 +25,13 @@ public class AgentSimulationJavaFX extends Application {
 	@Override
 	public void init() throws Exception {
 		this.springContext = SpringApplication.run(AgentSimulationJavaFX.class);
-		this.sim = new SimulationPanel();
+		this.sim = new SimulationPane(new TreeModule<>("Agents"), new TabModule(new ConsoleModule()));
 	}
 
 	@Override
 	public void start(Stage stage) throws Exception {
 		stage.setTitle("Agents4J Simulation");
-		Scene scene = new Scene(sim);
-		stage.setScene(scene);
+		stage.setScene(new Scene(sim));
 		stage.show();
 	}
 
